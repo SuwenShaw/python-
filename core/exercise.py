@@ -96,4 +96,4 @@ def get_prime(start, end):
     for i in range(start, end):
         if judge_prime(i):
             result.append(i)
-
+    return result
