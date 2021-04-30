@@ -199,7 +199,7 @@ print(list1)
 list1 = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
 for i in range(0, len(list1)):  # 设置选择排序次数
     for j in range(i + 1, len(list1)):  # i之后的所有数与i比较大小
-        Min_index = i  # 迭代得出最小值的索引（j每增加一次就在与前面的最小值对比）
+        Min_index = i  # 迭代得出最小值的索引(j每增加一次就在与前面的最小值对比)
         if list1[j] < list1[Min_index]:
             Min_index = j
         list1[i], list1[Min_index] = list1[Min_index], list1[i]  # 每比较一次就将最小值放在i位置上
