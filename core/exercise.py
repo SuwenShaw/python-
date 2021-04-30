@@ -97,3 +97,36 @@ def get_prime(start, end):
         if judge_prime(i):
             result.append(i)
     return result
+
+
+# 202010429
+# 10. 冒泡排序 核心:两两交换，娜位置，到最后的就是最大的数
+def sort_bubble(arr):
+    for i in range(len(arr)):
+        for k in range(len(arr) - i - 1):
+            if arr[k] > arr[k + 1]:
+                arr[k], arr[k + 1] = arr[k + 1], arr[k]
+
+
+# 11. 选择排序 核心: 每次循环找到最小的，找到就和当前循环对于的索引位置交换
+# 方法1 找到就交换
+def sort_select1(arr):
+    for i in range(len(arr)):
+        for k in range(i + 1, len(arr)):
+            if arr[k] < arr[i]:
+                arr[i], arr[k] = arr[k], arr[i]
+
+
+# 方法2 记录每次循环最小值的索引，最后交换
+def sort_select2(arr):
+    for i in range(len(arr)):
+        min_index = i
+        for k in range(i + 1, len(arr)):
+            if arr[k] < arr[min_index]:
+                min_index = k
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+
+# 方法1 和 方法2 的区别:
+#   方法1 要多交换几次
+#   方法2 要多存一个变量 min_index
+# 推荐使用 2
