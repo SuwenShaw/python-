@@ -1,4 +1,5 @@
 from math import pi
+import collections
 
 # 打印九九乘法表
 for i in range(1, 10):
@@ -196,12 +197,102 @@ for i in range(len(list1) - 1):  # 设置冒泡排序次数
 print(list1)
 
 # 2. 请使用选择排序对列表中的元素进行排序
+# 每一次遍历的时候，一选到小的就交换，直到遍历结束i位置上就是所有的最小值
 list1 = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
 for i in range(0, len(list1)):  # 设置选择排序次数
     for j in range(i + 1, len(list1)):  # i之后的所有数与i比较大小
-        Min_index = i  # 迭代得出最小值的索引(j每增加一次就在与前面的最小值对比)
-        if list1[j] < list1[Min_index]:
-            Min_index = j
-        list1[i], list1[Min_index] = list1[Min_index], list1[i]  # 每比较一次就将最小值放在i位置上
+        min_index = i  # 迭代得出最小值的索引(j每增加一次就在与前面的最小值对比)
+        if list1[j] < list1[min_index]:
+            min_index = j
+        list1[i], list1[min_index] = list1[min_index], list1[i]  # 每比较一次就将最小值放在i位置上
 
 print(list1)
+
+list1 = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
+for i in range(0, len(list1)):  # 设置选择排序次数
+    for j in range(i + 1, len(list1)):  # i之后的所有数与i比较大小
+        if list1[j] < list1[i]:
+            list1[i], list1[j] = list1[j], list1[i]  # 每比较一次就将最小值放在i位置上
+
+print(list1)
+
+# 每一次遍历后选出最小值与i交换位置
+list1 = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
+for i in range(0, len(list1)):  # 设置选择排序次数
+    min_index = i
+    for j in range(i + 1, len(list1)):  # i之后的所有数与i比较大小
+        if list1[j] < list1[min_index]:
+            min_index = j
+    list1[i], list1[min_index] = list1[min_index], list1[i]
+
+print(list1)
+
+
+# 20210501
+# 1.请设计一个函数，查找列表中的最小的元素
+def min_factor(l):
+    for i in range(1, len(l)):
+        if l[i] < l[0]:
+            l[0], l[i] = l[i], l[0]
+    return l[0]
+
+
+list1 = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
+print(min_factor(list1))
+
+
+# 2.现在有一个字典，key的类型为字符串，value类型为int，请设计一个函数，求所有的value之和
+# 字典
+def sum_value(d):
+    sum_value = 0
+    for i in d:  # 重点
+        sum_value = sum_value + d[i]
+    return sum_value
+
+
+d = {'xsw': 10, 'lyj': 60, 'zd': 120}
+print(sum_value(d))
+
+
+# 列表
+def sum_value(l):
+    sum_value = 0
+    for i in range(len(l)):  # 与字典的区别
+        sum_value = sum_value + l[i]
+    return sum_value
+
+
+l = [10, 60, 120]
+print(sum_value(l))
+
+
+# 3.现在有一个排好序的列表，请设计一个函数:
+#   函数的输入是一个元素
+#   函数内部使用二分查找查找该元素
+#   如果查找成功，则返回该元素对应的索引
+#   如果列表中不存在该元素，则返回None
+
+
+def binary_search(arr, l, r, x):  # arr为排好序的列表，l为列表最左的下标，r为最右的下标，x为要查找的元素
+    if r >= l:
+        mid = l + (r - l) // 2
+        if x == arr[mid]:
+            return mid
+        if x < arr[mid]:
+            return binary_search(arr, l, mid - 1, x)  # 递归
+        if x > arr[mid]:
+            return binary_search(arr, mid + 1, r, x)  # 递归
+        else:
+            return None
+
+
+arr = [1, 3, 6, 8, 10, 15, 17, 20]
+print(binary_search(arr, 0, len(arr) - 1, 15))
+print(binary_search(arr, 0, len(arr) - 1, 2))
+
+# 4.现在给到一个列表，请统计列表中各元素的个数
+list2 = [2, 5, 19, 8, 5, 24, 5, 2, 3, 11, 2]
+c = collections.Counter(list2)  # c.subtract可以从计数结果中减去个数，c.update可以增加元素统计
+print(c)
+dict_c = dict(c)
+print(dict_c)
