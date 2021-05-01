@@ -51,11 +51,11 @@ print(area_circle(2))
 
 # 3. 给到一个列表，请计算列表中所有元素之和
 nums = [1, 4, 6, 9, 3.5]
-sum = 0
+result = 0
 for i in range(0, len(nums)):
-    sum = sum + nums[i]
+    result = result + nums[i]
 
-print(sum)
+print(result)
 
 # 4. 给到一个列表，请计算出列表中所有偶数之和
 nums = [1, 4, 6, 9, 3.5]
@@ -84,42 +84,42 @@ print(sum_prime)
 nums = [1, 2, 11, 101, 4, 6, 9]
 
 
-def sum(nums):
-    sum = 0
+def sum_list(nums):
+    result = 0
     for i in range(0, len(nums)):
-        sum = sum + nums[i]
+        result = result + nums[i]
     if i == len(nums) - 1:
-        return sum
+        return result
 
 
-print(sum(nums))
+print(sum_list(nums))
 
 
-def sum(nums):
-    sum = 0
+def sum_list(nums):
+    result = 0
     for i in range(0, len(nums)):
-        sum = sum + nums[i]
+        result = result + nums[i]
         if i == len(nums) - 1:
-            return sum
+            return result
 
 
-print(sum(nums))
+print(sum_list(nums))
 
 
 def sum_even(nums):
-    sum_even = 0
+    result = 0
     for i in range(0, len(nums)):
         if nums[i] % 2 == 0:
-            sum_even = sum_even + nums[i]
+            result = result + nums[i]
     if i == len(nums) - 1:
-        return sum_even
+        return result
 
 
 print(sum_even(nums))
 
 
 def sum_prime(nums):
-    sum_prime = 0
+    result = 0
     for i in range(0, len(nums)):
         if nums[i] == 1:
             continue
@@ -127,9 +127,9 @@ def sum_prime(nums):
             if nums[i] % j == 0:
                 break
         else:
-            sum_prime = sum_prime + nums[i]
+            result = result + nums[i]
     if i == len(nums) - 1:
-        return sum_prime
+        return result
 
 
 print(sum_prime(nums))
@@ -188,82 +188,82 @@ print(range_prime(a, b))
 
 # 20210430
 # 1. 请使用冒泡排序对列表中的元素进行排序
-list1 = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
-for i in range(len(list1) - 1):  # 设置冒泡排序次数
-    for j in range(0, len(list1) - i - 1):  # 设置每一次冒泡排序需要的排序次数
-        if list1[j] > list1[j + 1]:
-            list1[j], list1[j + 1] = list1[j + 1], list1[j]  # 将较小的数排在前面
+arr = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
+for i in range(len(arr) - 1):  # 设置冒泡排序次数
+    for j in range(0, len(arr) - i - 1):  # 设置每一次冒泡排序需要的排序次数
+        if arr[j] > arr[j + 1]:
+            arr[j], arr[j + 1] = arr[j + 1], arr[j]  # 将较小的数排在前面
 
-print(list1)
+print(arr)
 
 # 2. 请使用选择排序对列表中的元素进行排序
 # 每一次遍历的时候，一选到小的就交换，直到遍历结束i位置上就是所有的最小值
-list1 = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
-for i in range(0, len(list1)):  # 设置选择排序次数
-    for j in range(i + 1, len(list1)):  # i之后的所有数与i比较大小
+arr = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
+for i in range(0, len(arr)):  # 设置选择排序次数
+    for j in range(i + 1, len(arr)):  # i之后的所有数与i比较大小
         min_index = i  # 迭代得出最小值的索引(j每增加一次就在与前面的最小值对比)
-        if list1[j] < list1[min_index]:
+        if arr[j] < arr[min_index]:
             min_index = j
-        list1[i], list1[min_index] = list1[min_index], list1[i]  # 每比较一次就将最小值放在i位置上
+        arr[i], arr[min_index] = arr[min_index], arr[i]  # 每比较一次就将最小值放在i位置上
 
-print(list1)
+print(arr)
 
-list1 = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
-for i in range(0, len(list1)):  # 设置选择排序次数
-    for j in range(i + 1, len(list1)):  # i之后的所有数与i比较大小
-        if list1[j] < list1[i]:
-            list1[i], list1[j] = list1[j], list1[i]  # 每比较一次就将最小值放在i位置上
+arr = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
+for i in range(0, len(arr)):  # 设置选择排序次数
+    for j in range(i + 1, len(arr)):  # i之后的所有数与i比较大小
+        if arr[j] < arr[i]:
+            arr[i], arr[j] = arr[j], arr[i]  # 每比较一次就将最小值放在i位置上
 
-print(list1)
+print(arr)
 
 # 每一次遍历后选出最小值与i交换位置
-list1 = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
-for i in range(0, len(list1)):  # 设置选择排序次数
+arr = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
+for i in range(0, len(arr)):  # 设置选择排序次数
     min_index = i
-    for j in range(i + 1, len(list1)):  # i之后的所有数与i比较大小
-        if list1[j] < list1[min_index]:
+    for j in range(i + 1, len(arr)):  # i之后的所有数与i比较大小
+        if arr[j] < arr[min_index]:
             min_index = j
-    list1[i], list1[min_index] = list1[min_index], list1[i]
+    arr[i], arr[min_index] = arr[min_index], arr[i]
 
-print(list1)
+print(arr)
 
 
 # 20210501
 # 1.请设计一个函数，查找列表中的最小的元素
-def min_factor(l):
-    for i in range(1, len(l)):
-        if l[i] < l[0]:
-            l[0], l[i] = l[i], l[0]
-    return l[0]
+def min_factor(arr):
+    for i in range(1, len(arr)):
+        if arr[i] < arr[0]:
+            arr[0], arr[i] = arr[i], arr[0]
+    return arr[0]
 
 
-list1 = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
-print(min_factor(list1))
+arr = [22, 85, 19, 98, 8, 24, 5, 23, 3, 11, 2]
+print(min_factor(arr))
 
 
 # 2.现在有一个字典，key的类型为字符串，value类型为int，请设计一个函数，求所有的value之和
 # 字典
-def sum_value(d):
-    sum_value = 0
-    for i in d:  # 重点
-        sum_value = sum_value + d[i]
-    return sum_value
+def sum_value(dictionary):
+    result = 0
+    for i in dictionary:  # 重点
+        result = result + dictionary[i]
+    return result
 
 
-d = {'xsw': 10, 'lyj': 60, 'zd': 120}
-print(sum_value(d))
+dictionary = {'xsw': 10, 'lyj': 60, 'zd': 120}
+print(sum_value(dictionary))
 
 
 # 列表
-def sum_value(l):
-    sum_value = 0
-    for i in range(len(l)):  # 与字典的区别
-        sum_value = sum_value + l[i]
-    return sum_value
+def sum_value(arr):
+    result = 0
+    for i in range(len(arr)):  # 与字典的区别
+        result = result + arr[i]
+    return result
 
 
-l = [10, 60, 120]
-print(sum_value(l))
+arr = [10, 60, 120]
+print(sum_value(arr))
 
 
 # 3.现在有一个排好序的列表，请设计一个函数:
@@ -291,8 +291,14 @@ print(binary_search(arr, 0, len(arr) - 1, 15))
 print(binary_search(arr, 0, len(arr) - 1, 2))
 
 # 4.现在给到一个列表，请统计列表中各元素的个数
-list2 = [2, 5, 19, 8, 5, 24, 5, 2, 3, 11, 2]
-c = collections.Counter(list2)  # c.subtract可以从计数结果中减去个数，c.update可以增加元素统计
+arr = [2, 5, 19, 8, 5, 24, 5, 2, 3, 11, 2]
+c = collections.Counter(arr)  # c.subtract可以从计数结果中减去个数，c.update可以增加元素统计
 print(c)
 dict_c = dict(c)
 print(dict_c)
+
+result = dict()
+for i in arr:
+    result[i] = arr.count(i)
+
+print(result)
