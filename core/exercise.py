@@ -2,6 +2,7 @@ import math
 
 
 # python 命名规则
+# 模块、类、函数、变量、常量的命名需要见名知意，命名的规则如下
 
 # 1. 模块命名
 #   模块推荐使用小写命名，
@@ -126,7 +127,102 @@ def sort_select2(arr):
                 min_index = k
         arr[i], arr[min_index] = arr[min_index], arr[i]
 
+
 # 方法1 和 方法2 的区别:
 #   方法1 要多交换几次
 #   方法2 要多存一个变量 min_index
 # 推荐使用 2
+
+# 20210501
+# 1.请设计一个函数，查找列表中的最小的元素
+def find_min(arr):
+    result = arr[0]
+    for ele in arr:
+        if ele < result:
+            result = ele
+    return result
+
+
+# 2.现在有一个字典，key的类型为字符串，value类型为int，请设计一个函数，求所有的value之和
+# 方法1 拿到所有的 key，通过 key 找到 value，求和
+def dict_values_sum1(dictionary):
+    result = 0
+    for key in dictionary:
+        result += dictionary[key]
+    return result
+
+
+# 方法2 拿到所有的 key,value,对 value 求和
+def dict_values_sum2(dictionary):
+    result = 0
+    for key, value in dictionary.items():
+        result += value
+    return result
+
+
+# 方法3 拿到所有的 value，求和
+def dict_values_sum3(dictionary):
+    result = 0
+    for value in dictionary.values():
+        result += value
+    return result
+
+
+# 补充内容:
+#   列表遍历的两种方式
+# 方法1 通过索引遍历
+def list_traverse1(arr):
+    for index in range(len(arr)):
+        print(arr[index])
+
+
+# 方法2 直接遍历
+def list_traverse2(arr):
+    for ele in arr:
+        print(ele)
+
+
+# 3.现在有一个排好序的列表，请设计一个函数:
+#   函数的输入是一个元素
+#   函数内部使用二分查找查找该元素
+#   如果查找成功，则返回该元素对应的索引
+#   如果列表中不存在该元素，则返回None
+def binary_search(arr, target):
+    pass
+
+
+# 4.现在给到一个列表，请统计列表中各元素的个数
+# 方法1 和 方法2 思路
+#   遍历列表，将结果放入到字典中，其中 key 为对应的元素，value 为次数，
+#   如果字典中不存在该元素，则对应的 value 设置为1
+#   如果字典中存在该元素，则对应的 value +1
+# 方法1
+def list_element_count1(arr):
+    result = {}
+    for ele in arr:
+        if ele in result.keys():
+            result[ele] += 1
+        else:
+            result[ele] = 1
+    return result
+
+
+# 方法2
+def list_element_count2(arr):
+    result = {}
+    for ele in arr:
+        if result.get(ele):
+            result[ele] += 1
+        else:
+            result[ele] = 1
+    return result
+
+
+# 方法3 使用 list 中 count() 方法求每个元素的数量
+def list_element_count3(arr):
+    result = {}
+    for ele in arr:
+        result[ele] = arr.count(ele)
+    return result
+
+# 推荐使用方法2，时间复杂度最小
