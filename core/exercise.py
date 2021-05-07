@@ -1,4 +1,7 @@
 import math
+import uuid
+import random
+import string
 
 
 # python 命名规则
@@ -225,4 +228,54 @@ def list_element_count3(arr):
         result[ele] = arr.count(ele)
     return result
 
+
 # 推荐使用方法2，时间复杂度最小
+
+# 20210507
+#  1. 现在有一张表，表shema如下，请使用 python 为该表随机生成5000行数据，只需将 insert 语句打印到控制台。
+#     其中，id 需要唯一(使用uuid),其他数据请随机值填充，创建时间和更新时间请使用 NULL 填充
+#      CREATE TABLE `fact_store_info`  (
+#        `id` int NOT NULL,
+#        `name` varchar(255) NULL COMMENT '门店名字',
+#        `store_no` varchar(255) NULL COMMENT '门店编码',
+#        `province` varchar(255) NULL COMMENT '所属省份',
+#        `city` varchar(255) NULL COMMENT '所属城市',
+#        `channel` varchar(255) NULL COMMENT '所属渠道',
+#        `created_time` timestamp NULL COMMENT '创建时间',
+#        `updated_time` timestamp NULL COMMENT '更新时间',
+#        PRIMARY KEY (`id`)
+#      );
+
+def get_random_str(length=random.randint(0, 60)):
+    """
+    生成随机字符串
+    :param length: 字符串长度
+    :return:
+    """
+    result = []
+    sample = random.sample(string.ascii_letters + string.digits, 62)
+    for index in range(length):
+        result.append(random.choice(sample))
+    return ''.join(result)
+
+
+def generate_mock_data(file_name: str, rows: int):
+    with open(file_name, 'w+') as file:
+        for i in range(rows):
+            id_str = str(uuid.uuid4())
+            name = get_random_str(10)
+            store_no = str(random.randint(1, 100)).zfill(3)
+            province = str(random.randint(0, 35)).zfill(2)
+            city = str(random.randint(1, 100)).zfill(3)
+            channel = str(random.randint(1, 100)).zfill(2)
+            created_time = 'NULL'
+            updated_time = 'NULL'
+            sql = "insert into fact_store_info" \
+                  "(id,name,store_no,province,city,channel,created_time,updated_time) " \
+                  "values('%s','%s','%s','%s','%s','%s','%s','%s');" \
+                  % (id_str, name, store_no, province, city, channel, created_time, updated_time)
+            file.write(sql)
+            file.write("\n")  # 换行符
+
+
+# generate_mock_data("/Users/hujie/PycharmProjects/learn_python/test.sql", 5000)
