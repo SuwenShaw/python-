@@ -270,12 +270,17 @@ def generate_mock_data(file_name: str, rows: int):
             channel = str(random.randint(1, 100)).zfill(2)
             created_time = 'NULL'
             updated_time = 'NULL'
+            # 字符串替换 方式1
             sql = "insert into fact_store_info" \
                   "(id,name,store_no,province,city,channel,created_time,updated_time) " \
                   "values('%s','%s','%s','%s','%s','%s','%s','%s');" \
                   % (id_str, name, store_no, province, city, channel, created_time, updated_time)
+            # 字符串替换 方式2
+            sql = "insert into fact_store_info" \
+                  "(id,name,store_no,province,city,channel,created_time,updated_time) " \
+                  "values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}');" \
+                .format(id_str, name, store_no, province, city, channel, created_time, updated_time)
             file.write(sql)
             file.write("\n")  # 换行符
-
 
 # generate_mock_data("/Users/hujie/PycharmProjects/learn_python/test.sql", 5000)
