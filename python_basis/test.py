@@ -1,5 +1,7 @@
 from math import pi
 import collections
+import random
+import uuid
 
 # 打印九九乘法表
 for i in range(1, 10):
@@ -302,3 +304,96 @@ for i in arr:
     result[i] = arr.count(i)
 
 print(result)
+
+
+# 20210507
+# 1. 现在有一张表，表shema如下，请使用 python 为该表随机生成5000行数据，只需将 insert 语句打印到控制台。
+#       其中，id 需要唯一(使用uuid),其他数据请随机值填充，创建时间和更新时间请使用 NULL 填充
+#       CREATE TABLE `fact_store_info`  (
+#          `id` int NOT NULL,
+#          `name` varchar(255) NULL COMMENT '门店名字',
+#          `store_no` varchar(255) NULL COMMENT '门店编码',
+#          `province` varchar(255) NULL COMMENT '所属省份',
+#          `city` varchar(255) NULL COMMENT '所属城市',
+#          `channel` varchar(255) NULL COMMENT '所属渠道',
+#          `created_time` timestamp NULL COMMENT '创建时间',
+#          `updated_time` timestamp NULL COMMENT '更新时间',
+#          PRIMARY KEY (`id`)
+#        );
+#        tips:
+#            a. 随机数据
+fact_store_info = {'id': str(uuid.uuid1()),
+                   'name': random.randint(1, 100),
+                   'store_no': random.randint(1, 100),
+                   'province': random.randint(1, 100),
+                   'city': random.randint(1, 100),
+                   'channel': random.randint(1, 100),
+                   'created_time': 'NULL',
+                   'updated_time': 'NULL'}
+print(fact_store_info)
+print('''
+insert into fact_store_info (id,name,store_no,province,city,channel,created_time,updated_time) \
+values({0[id]:s}, {0[name]:d}, {0[store_no]:d}, {0[province]:d}, {0[city]:d}, {0[channel]:d}, \
+{0[created_time]:s}, {0[updated_time]:s});
+'''.format(fact_store_info))
+
+for i in range(5):
+    fact_store_info = {'id': str(uuid.uuid1()),
+                       'name': random.randint(1, 100),
+                       'store_no': random.randint(1, 100),
+                       'province': random.randint(1, 100),
+                       'city': random.randint(1, 100),
+                       'channel': random.randint(1, 100),
+                       'created_time': 'NULL',
+                       'updated_time': 'NULL'}
+    print('''insert into fact_store_info (id,name,store_no,province,city,channel,created_time,updated_time) \
+    values({id:s}, {name:d}, {store_no:d}, {province:d}, {city:d}, {channel:d}, {created_time:s}, {updated_time:s}); \
+    '''.format(**fact_store_info))
+
+# 2. 请将 1 中的 insert 语句输出到文件中，文件名为 fact_store_info.sql
+
+
+def generate_table_data(file_name, rows):
+    with open(file_name, 'w+') as file:
+        for i in range(rows):
+            id = str(uuid.uuid1())
+            name = str(random.randint(1, 100))
+            store_no = str(random.randint(1, 100))
+            province = str(random.randint(1, 100))
+            city = str(random.randint(1, 100))
+            channel = str(random.randint(1, 10))
+            created_time = 'NULL'
+            updated_time = 'NULL'
+            sql = "insert into fact_store_info (id,name,store_no,province,city,channel,created_time,updated_time)" \
+                  "values({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7});" \
+                .format(id, name, store_no, province, city, channel, created_time, updated_time)
+            file.write(sql)
+            file.write('\n')
+# generate_table_data("/Users/xiaoshuwen/PycharmProjects/learn_python/python_basis/fact_store_info.sql", 5000)
+
+
+# 20210508
+# 现在有一个列表，请使用插入排序对该列表进行排序
+# 冒泡排序
+
+
+arr = [5, 18, 23, 9, 64, 2, 0, 37, 15]
+for i in range(1, len(arr)):
+    for j in range(0, i):
+        if arr[i] < arr[j]:
+            arr[j], arr[i] = arr[i], arr[j]
+
+print(arr)
+
+# 插入排序
+arr = [5, 18, 23, 9, 64, 2, 0, 37, 15]
+for i in range(1, len(arr)):
+    j = i - 1
+    # 将arr[i]与它前面的每一个数比较大小，如果arr[i]更小，则前面的数就往后挪一位，直到arr[i]到达合适位置，或者到第一位
+    while j >= 0 and arr[i] < arr[j]:
+        arr[j + 1] = arr[j]
+        j = j - 1
+    arr[j + 1] = arr[i]  # j<0或者arr[j]>arr[i]时,循环停止，arr[i]换到j+1的位置上
+
+print(arr)
+
