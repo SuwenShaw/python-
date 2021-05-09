@@ -15,7 +15,8 @@ for x in range(1, 11):
     print('{0:2d} {1:3d} {2:4d}'.format(x, x * x, x * x * x))
 
 # 如果你希望输出的形式更加多样，可以使用 str.format() 函数来格式化输出值
-
+print('{}网址： "{}!"'.format('菜鸟教程', 'www.runoob.com'))
+# 菜鸟教程网址： "www.runoob.com!"
 
 # 读和写文件
 # 打开一个文件
@@ -27,7 +28,7 @@ print(string)
 
 # 关闭打开的文件
 f.close()
-
+# 当处理一个文件对象时, 使用 with 关键字是非常好的方式。在结束后, 它会帮你正确的关闭文件
 # f.readline()从文件中读取单独的一行，包含换行符'\n'
 # f.readline() 如果返回一个空字符串, 说明已经已经读取到最后一行
 with open("/Users/xiaoshuwen/Desktop/Python Doc/测试/city.txt", "r") as file:

@@ -369,6 +369,7 @@ def generate_table_data(file_name, rows):
                 .format(id, name, store_no, province, city, channel, created_time, updated_time)
             file.write(sql)
             file.write('\n')
+
 # generate_table_data("/Users/xiaoshuwen/PycharmProjects/learn_python/python_basis/fact_store_info.sql", 5000)
 
 
@@ -398,4 +399,3 @@ for i in range(1, len(arr)):
 print(arr)
 
 
-# 20210509
