@@ -4,15 +4,15 @@
 # str()： 函数返回一个用户易读的表达形式
 # repr()： 产生一个解释器易读的表达形式
 # 输出一个平方与立方的表
-for x in range(1,11):
-    print(repr(x).rjust(2),repr(x*x).rjust(3), end=' ')  # rjust() 返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串
-    print(repr(x*x*x).rjust(4))
+for x in range(1, 11):
+    print(repr(x).rjust(2), repr(x * x).rjust(3), end=' ')  # rjust() 返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串
+    print(repr(x * x * x).rjust(4))
 
-for x in range(1,11):
-    print(repr(x).rjust(2),repr(x*x).rjust(3), repr(x*x*x).rjust(4))
+for x in range(1, 11):
+    print(repr(x).rjust(2), repr(x * x).rjust(3), repr(x * x * x).rjust(4))
 
-for x in range(1,11):
-    print('{0:2d} {1:3d} {2:4d}'.format(x, x*x, x*x*x))
+for x in range(1, 11):
+    print('{0:2d} {1:3d} {2:4d}'.format(x, x * x, x * x * x))
 
 # 如果你希望输出的形式更加多样，可以使用 str.format() 函数来格式化输出值
 

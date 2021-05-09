@@ -135,4 +135,3 @@ with open("myfile.txt") as f:
         print(line, end="")
 # 以上这段代码执行完毕后，就算在处理过程中出问题了，文件f总是会关闭
 
-# 异常链
