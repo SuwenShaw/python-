@@ -18,6 +18,14 @@ for x in range(1, 11):
 print('{}网址： "{}!"'.format('菜鸟教程', 'www.runoob.com'))
 # 菜鸟教程网址： "www.runoob.com!"
 
+# 位置参数
+print('{0} 和 {1}'.format('Google', 'Runoob'))
+# Google 和 Runoob
+
+# 关键字参数
+print('{name}网址： {site}'.format(name='菜鸟教程', site='www.runoob.com'))
+# 菜鸟教程网址： www.runoob.com
+
 # 读和写文件
 # 打开一个文件
 f = open("/tmp/foo.txt", "w")
