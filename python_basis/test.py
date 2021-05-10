@@ -447,7 +447,7 @@ class BMW(Car):
 nums1 = [1, 3, 5, 7]
 nums2 = [2, 3, 4, 8, 10]
 
-# 插入排序
+# 插入排序，短数组插入长数组里面去
 if len(nums2) <= len(nums1):
     nums = nums1 + nums2
     for i in range(len(nums1), len(nums)):
