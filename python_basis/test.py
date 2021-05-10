@@ -390,13 +390,82 @@ print(arr)
 arr = [5, 18, 23, 9, 64, 2, 0, 37, 15]
 for i in range(1, len(arr)):
     j = i - 1
+    key = arr[i]
     # 将arr[i]与它前面的每一个数比较大小，如果arr[i]更小，则前面的数就往后挪一位，直到arr[i]到达合适位置，或者到第一位
-    while j >= 0 and arr[i] < arr[j]:
+    while j >= 0 and key < arr[j]:
         arr[j + 1] = arr[j]
         j = j - 1
-    arr[j + 1] = arr[i]  # j<0或者arr[j]>arr[i]时,循环停止，arr[i]换到j+1的位置上
+    arr[j + 1] = key  # j<0或者arr[j]>arr[i]时,循环停止，arr[i]换到j+1的位置上
 
 print(arr)
 
 
 # 20210509
+# 1. 请设计一个车类，属性有车的颜色，价格，行为(方法)有运输(transport)、启动(start)、停止(stop)
+class Car:
+    def __init__(self, color, price):
+        self.color = color
+        self.price = price
+
+    @staticmethod
+    def transport():
+        print("运输")
+
+    @staticmethod
+    def start():
+        print("启动")
+
+    @staticmethod
+    def stop():
+        print("停止")
+
+
+mycar = Car('white', '10w')
+print(mycar)
+print(mycar.color)
+print(mycar.price)
+mycar.transport()
+mycar.start()
+mycar.stop()
+
+# 2. 请设计一个宝马车类，继承车类
+
+
+class BMW(Car):
+    pass
+
+# 笔试题：B为一个字符串，A是B的子集（字母顺序不能变），求A的可能结果个数。注：len(A)<=len(B),否则结果为0；B中有重复元素，结果为0。
+
+
+# 20210510
+# 给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
+# 初始化 nums1 和 nums2 的元素数量分别为 m 和 n 。你可以假设 nums1 的空间大小等于 m + n，这样它就有足够的空间保存来自 nums2 的元素。
+# 输入：nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+# 输出：[1,2,2,3,5,6]
+nums1 = [1, 3, 5, 7]
+nums2 = [2, 3, 4, 8, 10]
+
+# 插入排序
+if len(nums2) <= len(nums1):
+    nums = nums1 + nums2
+    for i in range(len(nums1), len(nums)):
+        j = i - 1
+        key = nums[i]
+        while j >= 0 and key < nums[j]:
+            nums[j+1] = nums[j]
+            j = j - 1
+        nums[j + 1] = key
+else:
+    nums = nums2 + nums1
+    for i in range(len(nums2), len(nums)):
+        j = i - 1
+        key = nums[i]
+        while j >= 0 and key < nums[j]:
+            nums[j+1] = nums[j]
+            j = j - 1
+        nums[j + 1] = key
+
+print(nums)
+
+
+
