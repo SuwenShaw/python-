@@ -38,6 +38,8 @@ lazy_cat.eat()
 # 如果希望在对象被销毁前，再做一些事情，可以考虑一下 __del__ 方法
 # 一个对象的 __del__ 方法一旦被调用，生命周期结束
 
+# 方法和函数的区别：定义函数def 函数名(),定义方法def __init__(self)
+
 
 class Cat:
 
@@ -147,6 +149,7 @@ class House:
         if item.area > self.free_area:
             # print("%s面积过大，不能添加到房子中" % item.name)
             print("{}面积过大，不能添加到房子中".format(item.name))
+            return
 
         # 2. 将家具的名称追加到名称列表中
         self.item_list.append(item.name)
@@ -409,4 +412,3 @@ game.start_game()
 # 4. 游戏结束，查看游戏最高分
 Game.show_top_score()
 
-#
