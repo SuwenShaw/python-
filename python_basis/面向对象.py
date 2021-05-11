@@ -412,3 +412,4 @@ game.start_game()
 # 4. 游戏结束，查看游戏最高分
 Game.show_top_score()
 
+#
