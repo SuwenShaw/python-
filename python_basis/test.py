@@ -484,8 +484,7 @@ print(nums)
 # 如果列值来自事实数据，GROUPING 函数将返回 0；如果列值是由 CUBE 操作生成的 NULL，则返回 1
 # 在 CUBE 操作中，生成的 NULL 代表所有值。
 # 可以编写 SELECT 语句以使用 GROUPING 函数将生成的任一 NULL 替换为字符串 ALL。
-# 由于事实数据中的 NULL 表示数据值未知，因此也可以将 SELECT 编码为返回字符串 UNKNOWN，用于表示事实数据中的 NULL。
-# 例如：
+# 由于事实数据中的 NULL 表示数据值未知，因此也可以将 SELECT 编码为返回字符串 UNKNOWN，用于表示事实数据中的 NULL
 # SELECT CASE WHEN (GROUPING(Item) = 1) THEN 'ALL'
 #             ELSE ISNULL(Item, 'UNKNOWN')
 #        END AS Item,
