@@ -480,6 +480,22 @@ print(nums)
 # 例：GROUP BY country,city WITH CUBE 等效于 GROUP BY GROUPING SETS ((country,city),(country),(city),())
 # 在group by子句中有n个列或者是有n个表达式的话，结果集会返回2的n次幂个可能组合
 
+# 可以使用 GROUPING 函数区分 CUBE 操作生成的 NULL 值和在实际数据中返回的 NULL 值
+# 如果列值来自事实数据，GROUPING 函数将返回 0；如果列值是由 CUBE 操作生成的 NULL，则返回 1
+# 在 CUBE 操作中，生成的 NULL 代表所有值。
+# 可以编写 SELECT 语句以使用 GROUPING 函数将生成的任一 NULL 替换为字符串 ALL。
+# 由于事实数据中的 NULL 表示数据值未知，因此也可以将 SELECT 编码为返回字符串 UNKNOWN，用于表示事实数据中的 NULL。
+# 例如：
+# SELECT CASE WHEN (GROUPING(Item) = 1) THEN 'ALL'
+#             ELSE ISNULL(Item, 'UNKNOWN')
+#        END AS Item,
+#        CASE WHEN (GROUPING(Color) = 1) THEN 'ALL'
+#             ELSE ISNULL(Color, 'UNKNOWN')
+#        END AS Color,
+#        SUM(Quantity) AS QtySum
+# FROM Inventory
+# GROUP BY Item, Color WITH CUBE
+
 # 2. 项目 data 目录下有一个 area_code_2021.json 文件，该文件为省市数据，
 #    请解析该文件，从该文件中提取所有的省份，然后写到 data 目录下的province.txt 文件中
 with open('/Users/xiaoshuwen/PycharmProjects/learn_python/data/area_code_2021.json', 'r') as file:
