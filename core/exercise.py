@@ -283,4 +283,34 @@ def generate_mock_data(file_name: str, rows: int):
             file.write(sql)
             file.write("\n")  # 换行符
 
+
 # generate_mock_data("/Users/hujie/PycharmProjects/learn_python/test.sql", 5000)
+
+# 求字符串子集个数
+
+def str_child_count(source_str, length):
+    if length == 1:
+        return len(source_str)
+    count = 0
+    for index in range(1, len(source_str) + 1):
+        count += str_child_count(source_str[index:], length - 1)
+    return count
+
+
+def str_child(source, length):
+    # 1. 检查子集长度是否小于等于源字符串
+    if length > len(source):
+        raise Exception("子串长度不能超过源字符串长度")
+    # 2. 检查字符串内元素是否重复
+    repeat = set()
+    for ele in source:
+        if repeat.__contains__(ele):
+            raise Exception("源字符串中包含重复字符")
+        else:
+            repeat.add(ele)
+    # 3. 计算
+    return str_child_count(source, length)
+
+
+# result = str_child("word", 3)
+# print(result)
