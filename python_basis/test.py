@@ -2,6 +2,9 @@ from math import pi
 import collections
 import random
 import uuid
+import json
+import re
+
 
 # 打印九九乘法表
 for i in range(1, 10):
@@ -469,5 +472,75 @@ else:
 
 print(nums)
 
+
+# 20210512
+# 1. 请用自己的话描述数据立方体
+# cube生成多维数据集，结果集包含各维度的所有可能组合
+# 语法；GROUP BY 列1，列2，... WITH CUBE
+# 例：GROUP BY country,city WITH CUBE 等效于 GROUP BY GROUPING SETS ((country,city),(country),(city),())
+# 在group by子句中有n个列或者是有n个表达式的话，结果集会返回2的n次幂个可能组合
+
+# 2. 项目 data 目录下有一个 area_code_2021.json 文件，该文件为省市数据，
+#    请解析该文件，从该文件中提取所有的省份，然后写到 data 目录下的province.txt 文件中
+with open('/Users/xiaoshuwen/PycharmProjects/learn_python/data/area_code_2021.json', 'r') as file:
+    arr = json.load(file)
+    for i in range(len(arr)):
+        province = arr[i]['name']
+        with open('/Users/xiaoshuwen/PycharmProjects/learn_python/data/province.txt', 'a+') as province_file:
+            province_file.write(province)
+            province_file.write('\n')
+
+
+# 3. 请设计一个 calc 模块，该模块提供基本的数学运算
+
+
+class Calc(object):
+    def __init__(self, num1, num2):
+        self.num1 = num1
+        self.num2 = num2
+
+    # 加法
+    def add(self):
+        return self.num1 + self.num2
+
+    # 减法
+    def subtract(self):
+        return self.num1 - self.num2
+
+    # 乘法
+    def multiply(self):
+        return self.num1 * self.num2
+
+    # 除法
+    def divide(self):
+        return self.num1 / self.num2
+
+    # 取余
+    def mod(self):
+        return self.num1 % self.num2
+
+    # 取绝对值
+    def abs(self):
+        if self.num1 >= 0:
+            if self.num2 >= 0:
+                return self.num1, self.num2
+            else:
+                return self.num1, -self.num2
+        if self.num1 < 0:
+            if self.num2 >= 0:
+                return -self.num1, self.num2
+            else:
+                return -self.num1, -self.num2
+
+
+a = -13
+b = 4
+test = Calc(a, b)
+print(test.add())
+print(test.subtract())
+print(test.multiply())
+print(test.divide())
+print(test.mod())
+print(test.abs())
 
 
