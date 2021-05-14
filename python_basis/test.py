@@ -3,7 +3,7 @@ import collections
 import random
 import uuid
 import json
-import re
+from openpyxl import Workbook
 
 
 # 打印九九乘法表
@@ -497,13 +497,18 @@ print(nums)
 
 # 2. 项目 data 目录下有一个 area_code_2021.json 文件，该文件为省市数据，
 #    请解析该文件，从该文件中提取所有的省份，然后写到 data 目录下的province.txt 文件中
-with open('/Users/xiaoshuwen/PycharmProjects/learn_python/data/area_code_2021.json', 'r') as file:
-    arr = json.load(file)
-    for i in range(len(arr)):
-        province = arr[i]['name']
-        with open('/Users/xiaoshuwen/PycharmProjects/learn_python/data/province.txt', 'a+') as province_file:
-            province_file.write(province)
-            province_file.write('\n')
+def json_to_txt(json_file, txt_file):
+    with open(json_file, 'r') as file:
+        arr = json.load(file)
+        with open(txt_file, 'a+') as province_file:
+            for i in range(len(arr)):
+                province = arr[i]['name']
+                province_file.write(province)
+                province_file.write('\n')
+
+
+# json_to_txt('/Users/xiaoshuwen/PycharmProjects/learn_python/data/area_code_2021.json',
+#             '/Users/xiaoshuwen/PycharmProjects/learn_python/data/province.txt')
 
 
 # 3. 请设计一个 calc 模块，该模块提供基本的数学运算
@@ -558,4 +563,69 @@ print(test.divide())
 print(test.mod())
 print(test.abs())
 
+
+# 20210514
+# 1. 提取 area_code_2021.json 省份信息，要求包含省份代码(code),省份名，
+#    并将这些信息写入到文件名为 area.xlsx sheet 名为 province 中
+def json_to_xlsx(json_file, xlsx_file):
+    with open(json_file, 'r') as file:
+        arr = json.load(file)
+        with open(xlsx_file, 'a+') as province_file:
+            wb = Workbook()  # 获取工作簿/Excel文件,同时也至少创建了一个工作表/worksheet
+            ws = wb.active  # 调用当前工作表
+            ws.title = "province"
+            for i in range(len(arr)):
+                code = str(arr[i]['code'])
+                province = arr[i]['name']
+                province_file.write(code)
+                province_file.write('\t')
+                province_file.write(province)
+                province_file.write('\n')
+
+
+# json_to_xlsx('/Users/xiaoshuwen/PycharmProjects/learn_python/data/area_code_2021.json',
+#              '/Users/xiaoshuwen/PycharmProjects/learn_python/data/area.xlsx')
+
+
+# 2. 提取 area_code_2021.json 省份城市信息，要求包含城市代码(code),省份名，城市名，
+#    并将这些信息写入到文件名为 area.xlsx sheet 名为 city 中
+
+
+def json_to_xlsx(json_file, xlsx_file):
+    with open(json_file, 'r') as file:
+        arr = json.load(file)
+        with open(xlsx_file, 'a+') as city_file:
+            wb = Workbook()
+            # ws1 = wb.active
+            # ws1.title = "province"
+            ws2 = wb.create_sheet("city")
+            for i in range(len(arr)):
+                province = arr[i]['name']
+                for j in range(len(arr[i]['children'])):
+                    code = str(arr[i]['children'][j]['code'])
+                    city = arr[i]['children'][j]['name']
+                    city_file.write(code)
+                    city_file.write('\t')
+                    city_file.write(province)
+                    city_file.write('\t')
+                    city_file.write(city)
+                    city_file.write('\n')
+
+
+# json_to_xlsx('/Users/xiaoshuwen/PycharmProjects/learn_python/data/area_code_2021.json',
+#              '/Users/xiaoshuwen/PycharmProjects/learn_python/data/area.xlsx')
+
+# 3. 最大子序列和，给定一个整数列表 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+#    eg: nums = [-2,1,-3,4,-1,2,1,-5,4] 输出为 6
+#    tips: 连续子数组 [4,-1,2,1] 的和最大，为 6
+nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+max_sum = nums[0]
+for i in range(len(nums)):
+    sum = nums[i]
+    for j in range(i+1, len(nums)):
+        sum += nums[j]
+        if sum > max_sum:
+            max_sum = sum
+
+print(max_sum)
 
