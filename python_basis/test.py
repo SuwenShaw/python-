@@ -3,6 +3,7 @@ import collections
 import random
 import uuid
 import json
+import openpyxl
 from openpyxl import Workbook
 
 
@@ -577,43 +578,62 @@ def json_to_xlsx(json_file, xlsx_file):
             for i in range(len(arr)):
                 code = str(arr[i]['code'])
                 province = arr[i]['name']
-                province_file.write(code)
-                province_file.write('\t')
-                province_file.write(province)
-                province_file.write('\n')
+                ws.cell(i+1, 1, code)
+                ws.cell(i+1, 2, province)
+                # ws['A' + str(i+1)] = code
+                # ws['B' + str(i+1)] = province
+            wb.save(xlsx_file)
 
 
-# json_to_xlsx('/Users/xiaoshuwen/PycharmProjects/learn_python/data/area_code_2021.json',
-#              '/Users/xiaoshuwen/PycharmProjects/learn_python/data/area.xlsx')
-
+json_to_xlsx('/Users/xiaoshuwen/PycharmProjects/learn_python/data/area_code_2021.json',
+             '/Users/xiaoshuwen/PycharmProjects/learn_python/data/area.xlsx')
 
 # 2. 提取 area_code_2021.json 省份城市信息，要求包含城市代码(code),省份名，城市名，
 #    并将这些信息写入到文件名为 area.xlsx sheet 名为 city 中
+
+
+# def json_to_xlsx(json_file, xlsx_file):
+#     with open(json_file, 'r') as file:
+#         arr = json.load(file)
+#         with open(xlsx_file, 'a+') as city_file:
+#             wb = Workbook()
+#             # ws1 = wb.active
+#             # ws1.title = "province"
+#             ws2 = wb.create_sheet("city")
+#             for i in range(len(arr)):
+#                 province = arr[i]['name']
+#                 for j in range(len(arr[i]['children'])):
+#                     code = str(arr[i]['children'][j]['code'])
+#                     city = arr[i]['children'][j]['name']
+#                     city_file.write(code)
+#                     city_file.write('\t')
+#                     city_file.write(province)
+#                     city_file.write('\t')
+#                     city_file.write(city)
+#                     city_file.write('\n')
 
 
 def json_to_xlsx(json_file, xlsx_file):
     with open(json_file, 'r') as file:
         arr = json.load(file)
         with open(xlsx_file, 'a+') as city_file:
-            wb = Workbook()
-            # ws1 = wb.active
-            # ws1.title = "province"
+            wb = openpyxl.load_workbook(xlsx_file)
             ws2 = wb.create_sheet("city")
+            count = 0
             for i in range(len(arr)):
                 province = arr[i]['name']
                 for j in range(len(arr[i]['children'])):
                     code = str(arr[i]['children'][j]['code'])
                     city = arr[i]['children'][j]['name']
-                    city_file.write(code)
-                    city_file.write('\t')
-                    city_file.write(province)
-                    city_file.write('\t')
-                    city_file.write(city)
-                    city_file.write('\n')
+                    count += 1
+                    ws2['A' + str(count)] = code
+                    ws2['B' + str(count)] = province
+                    ws2['C' + str(count)] = city
+            wb.save(xlsx_file)
 
 
-# json_to_xlsx('/Users/xiaoshuwen/PycharmProjects/learn_python/data/area_code_2021.json',
-#              '/Users/xiaoshuwen/PycharmProjects/learn_python/data/area.xlsx')
+json_to_xlsx('/Users/xiaoshuwen/PycharmProjects/learn_python/data/area_code_2021.json',
+             '/Users/xiaoshuwen/PycharmProjects/learn_python/data/area.xlsx')
 
 # 3. 最大子序列和，给定一个整数列表 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
 #    eg: nums = [-2,1,-3,4,-1,2,1,-5,4] 输出为 6
