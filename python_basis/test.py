@@ -649,3 +649,29 @@ for i in range(len(nums)):
 
 print(max_sum)
 
+# 20210518
+# 实现 pow(x, n) ，即计算 x 的 n 次幂函数
+
+
+def pow(x, n):
+    if x == 0:
+        return 0
+    if n == 0:
+        return 0
+    if n > 0:
+        result = 1
+        for i in range(n):
+            result = result * x
+        return result
+    if n < 0:
+        result = 1
+        for i in range(-n):
+            result = result * x
+        return 1/result
+
+
+print(pow(2, 3))
+print(pow(0, 4))
+print(pow(-2, 3))
+print(pow(-2, -3))
+
