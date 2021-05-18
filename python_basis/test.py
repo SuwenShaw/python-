@@ -674,4 +674,4 @@ print(pow(2, 3))
 print(pow(0, 4))
 print(pow(-2, 3))
 print(pow(-2, -3))
-
+print(pow(-1/2, -3))
