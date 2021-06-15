@@ -20,13 +20,8 @@ class Solution:
         header = ListNode()
         next = header
         carry_flag = False  # 进位标记
-        while True:
-            # 循环结束，退出
-            if l1 is None and l2 is None:
-                # 退出时查看是否有进位，如果有需要在最前面加1
-                if carry_flag:
-                    next.next = ListNode(val=1)
-                break
+
+        while l1 is not None or l2 is not None:
             # 计算
             value1 = 0
             value2 = 0
@@ -46,6 +41,10 @@ class Solution:
                 carry_flag = True
             next.next = ListNode(val=result_tmp)
             next = next.next
+
+        # 最后是否有进位，如果有需要加进去
+        if carry_flag:
+            next.next = ListNode(val=1)
         return header.next
 
 
