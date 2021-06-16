@@ -675,3 +675,55 @@ print(pow(0, 4))
 print(pow(-2, 3))
 print(pow(-2, -3))
 print(pow(-1/2, -3))
+
+
+# 20210519
+# https://leetcode-cn.com/problems/simplify-path/
+def simplify_path(path):
+    paths = path.split('/')
+    result = []
+    for ele in paths:
+        # ..result非空则返回上一级文件名
+        if ele == '..' and result:
+            result.pop()
+        # .或者空字符则跳过，不是则加入result
+        if ele not in ('.', '', '..'):
+            result.append(ele)
+    # 用'/'拼接result，并且在最前面加上'/'
+    return '/'+'/'.join(result)
+
+
+path1 = "/home//foo/"
+path2 = "/a/./b/../../c/"
+path3 = "/../"
+print(simplify_path(path2))
+
+
+# 20210520
+# https://leetcode-cn.com/problems/subsets/
+# 给你一个整数数组 nums ，数组中的元素 互不相同 。返回该数组所有可能的子集（幂集）。
+# 解集 不能 包含重复的子集。你可以按 任意顺序 返回解集。
+# https://www.runoob.com/w3cnote/python-understanding-dict-copy-shallow-or-deep.html 直接赋值、浅拷贝和深度拷贝解析
+
+
+def subsets(nums):
+    res = []
+
+    def backtracking(nums, idx, path):
+        res.append(path.copy())
+        for i in range(idx, len(nums)):
+            path.append(nums[i])
+            backtracking(nums, i + 1, path)
+            path.pop()
+
+    backtracking(sorted(nums), 0, [])
+    return res
+
+
+nums = [1, 2, 3]
+print(subsets(nums))
+
+
+
+
+
