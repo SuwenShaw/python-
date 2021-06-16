@@ -9,6 +9,7 @@
 #   直接相加结果会溢出，所以不能通过直接相加得到
 #   利用相加的特性，从个位开始加，遇到 10 进位，结果的余数为该位的值
 
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
